@@ -16,7 +16,7 @@ gulp.task('bower', function () {
     'bower_components/riot/riot.js',
     'bower_components/jQuery/dist/jquery.js',
     'bower_components/midilearn/midilearn.js',
-    'src/js/lib/nexusUI.js'
+    'bower_components/nexusUI/dist/nexusUI.js'
   ], {
   }).pipe(gulp.dest('dist/build/lib'));
 });

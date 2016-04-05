@@ -13,13 +13,9 @@ function onMIDIInit( midi, cb ) {
 
 	midi.inputsArray = [];
 	window.midi = midi;
-
-	for (var input of midi.inputs.values())
-		console.log(input.name);
 	
 	for (var output of midi.outputs.values())
 		window.midi.inputsArray.push(output);
-		console.log(input.name);
 
 	midi.noteOn = function(source, channel, note, velocity) {
     	source.send([0x90 + channel, note, velocity]);
