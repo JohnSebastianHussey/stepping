@@ -1,0 +1,46 @@
+.toggleContainer {
+	width: 109.5px;
+	float: left;
+}
+
+.toggleContainer canvas {
+	margin: 0px 10px 10px 10px;
+}
+
+.toggle {
+	width: 50px;
+	height: 50px;
+	margin: 0px 10px 10px 10px;
+	background-color: #EEEEEE;
+	border-radius: 50px;
+	border: 3px solid #E3E3E3;
+}
+
+.toggleContainer button {
+	margin: 0px 10px 10px 17px;
+}
+
+:global .toggle0.active {
+	background-color: #00AAFF;
+	border: 3px solid #4DC4FF;
+}
+
+:global .toggle1.active {
+	background-color: #FF9600;
+	border: 3px solid #FAC271;
+}
+
+:global .toggle2.active {
+	background-color: #FF00BF;
+	border: 3px solid #FF73DC;
+}
+
+:global .toggle3.active {
+	background-color: #00FF63;
+	border: 3px solid #79FFAD;
+}
+
+:global .toggle4.active {
+	background-color: #8200FF;
+	border: 3px solid #C180FF;
+}

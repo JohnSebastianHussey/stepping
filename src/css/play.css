@@ -1,0 +1,10 @@
+.playButton {
+	border-radius: 2px;
+	border: 2px #E3E3E3 solid;
+	padding: 0.5em;
+	font-size: 1.5em;
+	width: 65px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
