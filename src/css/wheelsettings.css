@@ -1,0 +1,18 @@
+.wheelsettingsContainer {
+	width: 135px;
+	float: left;
+}
+
+.wheelsettingsContainer canvas {
+	margin: 0px 39.5px 10px 39.5px;
+}
+
+.selectContainer {
+	margin: 0px 10px 10px 10px;
+	width: 115px;
+	color: #666666;
+}
+
+.selectContainer select{
+	width: 100%;
+}

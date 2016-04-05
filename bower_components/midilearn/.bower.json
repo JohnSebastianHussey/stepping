@@ -1,0 +1,14 @@
+{
+  "name": "midilearn",
+  "homepage": "https://github.com/JohnSebastianHussey/midilearn",
+  "_release": "01a2e1cb32",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "01a2e1cb32e853562ddc7cf57cfb8779fb886f5f"
+  },
+  "_source": "git://github.com/JohnSebastianHussey/midilearn.git",
+  "_target": "*",
+  "_originalSource": "JohnSebastianHussey/midilearn",
+  "_direct": true
+}
