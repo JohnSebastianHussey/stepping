@@ -1,4 +1,4 @@
-riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleContainer}"> <div each="{color, i in opts.colors}" toggleindex="{i}" class="js-toggle {parent.opts.styles.toggle} {⁗toggle⁗ + i} {i==1 ? ⁗active⁗ : ⁗⁗}"></div> <button class="js-play">Play</button> </div>', '', '', function(opts) {
+riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleContainer}"> <div each="{color, i in opts.colors}" toggleindex="{i}" class="js-toggle {parent.opts.styles.toggle} {⁗toggle⁗ + i} {i==1 ? ⁗active⁗ : ⁗⁗}"></div> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
 		var self = this;
@@ -29,9 +29,5 @@ riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleCon
 			$('#js-stepDuration').val(wheel.stepDuration)
 			$('#js-noteSelection').val(wheel.note)
 		})
-
-		$('.js-play').click(function(e) {
-			multicirclestep1.sequence(132);
-		});
 	});
 }, '{ }');

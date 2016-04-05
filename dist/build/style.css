@@ -1,22 +1,115 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat);.global__redclone___34Kz7 {
-	transition: .6s ease;
+@import url(https://fonts.googleapis.com/css?family=Montserrat);.global__container___1y-QC {
+    width: 100%;
+    text-align: center;
+    float: left;
 }
 
-.global__cyanclone___VYgC5 {
-	transition: .6s ease;
+.global__container___1y-QC h1 {
+    font-size: 4em;
+    color: #666666;
+    text-shadow: 2px 2px #B0B0B0;
 }
 
-.global__redclone___34Kz7.global__hover___3eVS9 {
-	transform: translate(22px, 0px);
+.hidden {
+    display: none;
 }
 
-.global__cyanclone___VYgC5.global__hover___3eVS9 {
-	transform: translate(-22px, 0px);
+.colorA {
+    color: #00AAFF;
+}
+
+.colorA.accent {
+    color: #4DC4FF;
+}
+
+.colorB {
+    color: #FF9600;
+}
+
+.colorB.accent {
+    color: #FAC271;
+}
+
+.colorC {
+    color: #FF00BF;
+}
+
+.colorC.accent {
+    color: #FF73DC;
+}
+
+.colorD {
+    color: #00FF63;
+}
+
+.colorD.accent {
+    color: #79FFAD;
+}
+
+.colorE {
+    color: #8200FF;
+}
+
+.colorE.accent {
+    color: #C180FF;
+}
+
+.linkColorA {
+    color: #00AAFF;
+}
+
+.linkColorA:hover {
+    color: #4DC4FF;
+}
+
+.linkColorB {
+    color: #FF9600;
+}
+
+.linkColorB:hover {
+    color: #FAC271;
+}
+
+.linkColorC {
+    color: #FF00BF;
+}
+
+.linkColorC:hover {
+    color: #FF73DC;
+}
+
+.linkColorD {
+    color: #00FF63;
+}
+
+.linkColorD:hover {
+    color: #79FFAD;
+}
+
+.linkColorE {
+    color: #8200FF;
+}
+
+.linkColorE:hover {
+    color: #C180FF;
 }
 
 .global__blurContainer___Dsm81.global__active___2THSs {
 	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
     filter: blur(2px);
+}
+
+.stepper {
+    width: 794.5px;
+    height: 550px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.play-container {
+    width: 93px;
+    margin: auto;
+    height: 57px;
 }
 
 @font-face {
@@ -47,6 +140,8 @@
 
 body {
 	font-family: 'Montserrat', sans-serif;
+    margin: 0px;
+    padding: 0px;
 }
 
 .icon-cross:before {
@@ -62,7 +157,7 @@ body {
 	width: 550px;
 	float: left;
 }.wheeltoggle__toggleContainer___1Zfoc {
-	width: 70px;
+	width: 109.5px;
 	float: left;
 }
 
@@ -109,6 +204,7 @@ body {
 }
 .wheelsettings__wheelsettingsContainer___2l8aO {
 	width: 135px;
+	height: 550px;
 	float: left;
 }
 
@@ -124,4 +220,27 @@ body {
 
 .wheelsettings__selectContainer___16f1j select{
 	width: 100%;
+}.about__textContainer___3tDdM {
+	color: #666666;
+	width: 555px;
+    margin: auto;
+}.play__playButton___1TnUq {
+	border-radius: 2px;
+	border: 2px #E3E3E3 solid;
+	padding: 0.5em;
+	font-size: 1.5em;
+	width: 65px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}.footer__footer___2pTS5 {
+    width: 100%;
+    color: #666666;
+    float: left;
+    background-color: #E3E3E3;
+    margin-top: 50px;
+}
+
+.footer__footer___2pTS5 p {
+	margin: 1em;
 }

@@ -2,6 +2,12 @@ import globalStyles from '../css/global.css';
 import multistepperStyles from '../css/multistepper.css';
 import wheeltoggleStyles from '../css/wheeltoggle.css';
 import wheelsettingsStyles from '../css/wheelsettings.css';
+import titleStyles from '../css/titletext.css';
+import aboutStyles from '../css/about.css';
+import playStyles from '../css/play.css';
+import footerStyles from '../css/footer.css';
+
+
 
 var BPM = 132;
 
@@ -28,6 +34,14 @@ function onMIDIInit( midi, cb ) {
   	cb();
 }
 
+window.samples = [
+	new Tone.Player("./samples/senA.mp3").toMaster(),
+	new Tone.Player("./samples/senB.mp3").toMaster(),
+	new Tone.Player("./samples/senC.mp3").toMaster(),
+	new Tone.Player("./samples/senD.mp3").toMaster(),
+	new Tone.Player("./samples/senE.mp3").toMaster()];
+
+
 $(window).load(function() {
 
 
@@ -35,7 +49,28 @@ $(window).load(function() {
 
 	var mountComponents = function() {
 
-		riot.mount('raw')
+		riot.mount('raw');
+
+		$.extend(titleStyles, globalStyles)
+		riot.mount('titletext', {
+			styles: titleStyles
+		});
+
+		$.extend(aboutStyles, globalStyles)
+		riot.mount('about', {
+			styles: aboutStyles
+		});
+
+		$.extend(playStyles, globalStyles)
+		riot.mount('play', {
+			styles: playStyles
+		});
+
+		$.extend(footerStyles, globalStyles)
+		riot.mount('footer', {
+			styles: footerStyles
+		});
+
 
 		var colors = [
 			{
@@ -104,8 +139,8 @@ $(window).load(function() {
 			colors: colors,
 			notes: fullNotes,
 			stepDurations: stepDurations,
-			midi: window.midi.inputsArray.reverse()
-		})
+			midi: (window.midi) ? window.midi.inputsArray.reverse() : []
+		});
 
 		multicirclestep1.on('*', function(val) {
 			var instrumentIndex = val.list.midiInstrument;
@@ -113,25 +148,33 @@ $(window).load(function() {
 			var step = val.list.place;
 			var velocity = Math.floor(val.list.list[step]*127);
 			if (velocity>0) {
-				var instrument = window.midi.inputsArray[instrumentIndex];
+				//var instrument = window.midi.inputsArray[instrumentIndex];
 				var duration  = 60000/(BPM/val.list.stepDuration);
-				window.midi.noteOn(instrument, 0, note, velocity);
-				window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
-
+				var sample = window.samples[val.wheel];
+				sample.volume.value = -30 + 30 * (velocity*(1/127));
+				sample.stop();
+				sample.start();
+				//window.midi.noteOn(instrument, 0, note, velocity);
+				//window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
 			}
 		});
 	};
 
-	navigator.requestMIDIAccess().then(function(access) {
-	    onMIDIInit(access, mountComponents);
-	}, function(err) { // well at least we tried!
-	    if (window.AudioContext) { // Chrome
-	        opts.api = 'webaudio';
-	    } else if (window.Audio) { // Firefox
-	        opts.api = 'audiotag';
-	    } else { // no support
-	        return;
-	    }
-	});
+	if (navigator.requestMIDIAccess) {
+		navigator.requestMIDIAccess().then(function(access) {
+		    onMIDIInit(access, mountComponents);
+		}, function(err) { // well at least we tried!
+		    if (window.AudioContext) { // Chrome
+		        opts.api = 'webaudio';
+		    } else if (window.Audio) { // Firefox
+		        opts.api = 'audiotag';
+		    } else { // no support
+		        return;
+		    }
+		});
+	}
+	else {
+		mountComponents();
+	}
 
 })

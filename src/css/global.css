@@ -1,22 +1,115 @@
-.redclone {
-	transition: .6s ease;
+.container {
+    width: 100%;
+    text-align: center;
+    float: left;
 }
 
-.cyanclone {
-	transition: .6s ease;
+.container h1 {
+    font-size: 4em;
+    color: #666666;
+    text-shadow: 2px 2px #B0B0B0;
 }
 
-.redclone.hover {
-	transform: translate(22px, 0px);
+:global .hidden {
+    display: none;
 }
 
-.cyanclone.hover {
-	transform: translate(-22px, 0px);
+:global .colorA {
+    color: #00AAFF;
+}
+
+:global .colorA.accent {
+    color: #4DC4FF;
+}
+
+:global .colorB {
+    color: #FF9600;
+}
+
+:global .colorB.accent {
+    color: #FAC271;
+}
+
+:global .colorC {
+    color: #FF00BF;
+}
+
+:global .colorC.accent {
+    color: #FF73DC;
+}
+
+:global .colorD {
+    color: #00FF63;
+}
+
+:global .colorD.accent {
+    color: #79FFAD;
+}
+
+:global .colorE {
+    color: #8200FF;
+}
+
+:global .colorE.accent {
+    color: #C180FF;
+}
+
+:global .linkColorA {
+    color: #00AAFF;
+}
+
+:global .linkColorA:hover {
+    color: #4DC4FF;
+}
+
+:global .linkColorB {
+    color: #FF9600;
+}
+
+:global .linkColorB:hover {
+    color: #FAC271;
+}
+
+:global .linkColorC {
+    color: #FF00BF;
+}
+
+:global .linkColorC:hover {
+    color: #FF73DC;
+}
+
+:global .linkColorD {
+    color: #00FF63;
+}
+
+:global .linkColorD:hover {
+    color: #79FFAD;
+}
+
+:global .linkColorE {
+    color: #8200FF;
+}
+
+:global .linkColorE:hover {
+    color: #C180FF;
 }
 
 .blurContainer.active {
 	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
     filter: blur(2px);
+}
+
+:global .stepper {
+    width: 794.5px;
+    height: 550px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+:global .play-container {
+    width: 93px;
+    margin: auto;
+    height: 57px;
 }
 
 :global @font-face {
@@ -51,6 +144,8 @@
 
 body {
 	font-family: 'Montserrat', sans-serif;
+    margin: 0px;
+    padding: 0px;
 }
 
 :global .icon-cross:before {

@@ -1,4 +1,4 @@
-riot.tag2('wheelsettings', '<div class="js-wheelsettings-container {opts.styles.wheelsettingsContainer}"> <div class="js-dial-container"> </div> <div class="{opts.styles.selectContainer}"> <label>Note</label> <select id="js-noteSelection"> <option each="{note, i in opts.notes}" value="{i}">{note} </option> </select> </div> <div class="{opts.styles.selectContainer}"> <label>Step Duration</label> <select id="js-stepDuration"> <option each="{stepDuration, i in opts.stepDurations}" value="{stepDuration.value}">{stepDuration.name} </option> </select> </div> <div class="{opts.styles.selectContainer}"> <label>Midi Instrument</label> <select id="js-midi"> <option each="{instrument, i in opts.midi}" value="{i}">{instrument.name} </option> </select> </div> </div>', '', '', function(opts) {
+riot.tag2('wheelsettings', '<div class="js-wheelsettings-container {opts.styles.wheelsettingsContainer}"> <div class="js-dial-container"> </div> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
 

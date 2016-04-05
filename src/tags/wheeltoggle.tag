@@ -1,7 +1,6 @@
 <wheeltoggle>
 	<div class='js-toggle-container {opts.styles.toggleContainer}'>
 		<div each={ color, i in opts.colors } toggleIndex='{ i }' class='js-toggle {parent.opts.styles.toggle} { "toggle" + i } { i==1 ? "active" : ""}'></div>
-		<button class='js-play'>Play</button>
 	</div>
 
 	this.on('mount', function() {
@@ -33,9 +32,5 @@
 			$('#js-stepDuration').val(wheel.stepDuration)
 			$('#js-noteSelection').val(wheel.note)
 		})
-
-		$('.js-play').click(function(e) {
-			multicirclestep1.sequence(132);
-		});
 	});
 </wheeltoggle>

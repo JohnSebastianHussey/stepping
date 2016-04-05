@@ -72,6 +72,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _wheelsettings2 = _interopRequireDefault(_wheelsettings);
 
+	var _titletext = __webpack_require__(5);
+
+	var _titletext2 = _interopRequireDefault(_titletext);
+
+	var _about = __webpack_require__(6);
+
+	var _about2 = _interopRequireDefault(_about);
+
+	var _play = __webpack_require__(7);
+
+	var _play2 = _interopRequireDefault(_play);
+
+	var _footer = __webpack_require__(8);
+
+	var _footer2 = _interopRequireDefault(_footer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var BPM = 132;
@@ -121,6 +137,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		cb();
 	}
 
+	window.samples = [new Tone.Player("./samples/senA.mp3").toMaster(), new Tone.Player("./samples/senB.mp3").toMaster(), new Tone.Player("./samples/senC.mp3").toMaster(), new Tone.Player("./samples/senD.mp3").toMaster(), new Tone.Player("./samples/senE.mp3").toMaster()];
+
 	$(window).load(function () {
 
 		// problem - always merging dictionaries of styles
@@ -128,6 +146,26 @@ return /******/ (function(modules) { // webpackBootstrap
 		var mountComponents = function mountComponents() {
 
 			riot.mount('raw');
+
+			$.extend(_titletext2.default, _global2.default);
+			riot.mount('titletext', {
+				styles: _titletext2.default
+			});
+
+			$.extend(_about2.default, _global2.default);
+			riot.mount('about', {
+				styles: _about2.default
+			});
+
+			$.extend(_play2.default, _global2.default);
+			riot.mount('play', {
+				styles: _play2.default
+			});
+
+			$.extend(_footer2.default, _global2.default);
+			riot.mount('footer', {
+				styles: _footer2.default
+			});
 
 			var colors = [{
 				accent: "#00AAFF",
@@ -185,7 +223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				colors: colors,
 				notes: fullNotes,
 				stepDurations: stepDurations,
-				midi: window.midi.inputsArray.reverse()
+				midi: window.midi ? window.midi.inputsArray.reverse() : []
 			});
 
 			multicirclestep1.on('*', function (val) {
@@ -194,29 +232,37 @@ return /******/ (function(modules) { // webpackBootstrap
 				var step = val.list.place;
 				var velocity = Math.floor(val.list.list[step] * 127);
 				if (velocity > 0) {
-					var instrument = window.midi.inputsArray[instrumentIndex];
+					//var instrument = window.midi.inputsArray[instrumentIndex];
 					var duration = 60000 / (BPM / val.list.stepDuration);
-					window.midi.noteOn(instrument, 0, note, velocity);
-					window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
+					var sample = window.samples[val.wheel];
+					sample.volume.value = -30 + 30 * (velocity * (1 / 127));
+					sample.stop();
+					sample.start();
+					//window.midi.noteOn(instrument, 0, note, velocity);
+					//window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
 				}
 			});
 		};
 
-		navigator.requestMIDIAccess().then(function (access) {
-			onMIDIInit(access, mountComponents);
-		}, function (err) {
-			// well at least we tried!
-			if (window.AudioContext) {
-				// Chrome
-				opts.api = 'webaudio';
-			} else if (window.Audio) {
-				// Firefox
-				opts.api = 'audiotag';
-			} else {
-				// no support
-				return;
-			}
-		});
+		if (navigator.requestMIDIAccess) {
+			navigator.requestMIDIAccess().then(function (access) {
+				onMIDIInit(access, mountComponents);
+			}, function (err) {
+				// well at least we tried!
+				if (window.AudioContext) {
+					// Chrome
+					opts.api = 'webaudio';
+				} else if (window.Audio) {
+					// Firefox
+					opts.api = 'audiotag';
+				} else {
+					// no support
+					return;
+				}
+			});
+		} else {
+			mountComponents();
+		}
 	});
 
 /***/ },
@@ -224,7 +270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"redclone":"global__redclone___34Kz7","cyanclone":"global__cyanclone___VYgC5","hover":"global__hover___3eVS9","blurContainer":"global__blurContainer___Dsm81","active":"global__active___2THSs"};
+	module.exports = {"container":"global__container___1y-QC","blurContainer":"global__blurContainer___Dsm81","active":"global__active___2THSs"};
 
 /***/ },
 /* 2 */
@@ -246,6 +292,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// removed by extract-text-webpack-plugin
 	module.exports = {"wheelsettingsContainer":"wheelsettings__wheelsettingsContainer___2l8aO","selectContainer":"wheelsettings__selectContainer___16f1j"};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"textContainer":"about__textContainer___3tDdM"};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"playButton":"play__playButton___1TnUq"};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"footer":"footer__footer___2pTS5"};
 
 /***/ }
 /******/ ])

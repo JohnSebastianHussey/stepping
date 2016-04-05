@@ -3,6 +3,7 @@
 		<div class='js-dial-container'>
 
 		</div>
+		<!--
 		<div class='{ opts.styles.selectContainer }'>
 			<label>Note</label>
 			<select id='js-noteSelection'>
@@ -22,7 +23,7 @@
 			<select id='js-midi'>
 				<option each={ instrument, i in opts.midi } value='{ i }'>{ instrument.name } </option>
 			</select>
-		</div>
+		</div>-->
 	</div>
 
 	this.on('mount', function() {

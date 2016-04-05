@@ -5891,7 +5891,7 @@ multicirclestep.prototype.sequence = function(bpm) {
 	if (bpm) {
 		this.bpm = bpm;
 	}	
-	this.isSequencing = true;
+	this.sequencing = true;
 	requestAnimationFrame(this.seqStep.bind(this));
 }
 
@@ -5955,7 +5955,7 @@ multicirclestep.prototype.seqStep = function() {
 
 	}
 
-    if (this.isSequencing) {
+    if (this.sequencing) {
 		requestAnimationFrame(this.seqStep.bind(this));
 	}  
 }

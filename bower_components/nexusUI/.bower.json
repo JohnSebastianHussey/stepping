@@ -1,11 +1,11 @@
 {
   "name": "nexusUI",
   "homepage": "https://github.com/JohnSebastianHussey/nexusUI",
-  "_release": "c3ebf8cc9b",
+  "_release": "db69a8ed88",
   "_resolution": {
     "type": "branch",
     "branch": "multicirclestep",
-    "commit": "c3ebf8cc9bdb422c25cafd23d6101b2b5c04cf51"
+    "commit": "db69a8ed880920b18444c54a80641381c17ff48f"
   },
   "_source": "git://github.com/JohnSebastianHussey/nexusUI.git",
   "_target": "multicirclestep",

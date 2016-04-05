@@ -1,17 +1,19 @@
-riot.tag2('about', '<div class="{opts.styles.about}"> <div class="{opts.styles.title}"> <h2>{opts.title}</h2> <div class="{opts.styles.titleBorder}"></div> </div> <div class="{opts.styles.imageContainer}"> <div class="{opts.styles.imageBorder}"> <img riot-src="{opts.img}" class="{opts.styles.image}"> </div> </div> <div class="{opts.styles.textContainer}"> <p class="{opts.styles.text}"></p> </div> </div>', '', '', function(opts) {
+riot.tag2('about', '<div class="{opts.styles.textContainer}"> <p> <span class="colorA">S</span><span class="colorB">t</span><span class="colorC">e</span><span class="colorD">p</span><span class="colorE">p</span><span class="colorA">i</span><span class="colorB">n</span><span class="colorC">g</span> is a 5 track circular step sequencer inspired by <a href="http://www.olympianoiseco.com/apps/patterning/" class="linkColorA">patterning</a>. The number of steps for each track can be set with the top dial and the placement of beats can be automated with the second dial, which uses the <a href="http://cgm.cs.mcgill.ca/~godfried/publications/banff.pdf" class="linkColorB">euclidean beats</a> algorithm. Beats can also be placed manually with variable velocity by clicking on the steps of the sequencer. The sequencer plays samples from <a href="https://vimeo.com/110633932" class="linkColorC">Görkem Şen\'s</a> Yaybahar. </p> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
 
-		$(this.root).find('.' + this.opts.styles.textContainer).html(this.opts.text)
-
-		var self = this;
-		setTimeout(function() {
-			self.opts.renderLetterBlur([$('.js-email')], opts, $('.js-email'));
-		}, 100)
 	});
-
-	this.mixin('renderLetterBlur')
 }, '{ }');
+
+riot.tag2('footer', '<div class="{opts.styles.footer}"> <p>Stepping was made by <a class="linkColorA" href="https://twitter.com/js_hussey">John Hussey</a> with <a class="linkColorB" href="http://nexusosc.com/">nexusOSC</a>, <a class="linkColorC" href="http://tonejs.org/">Tone.js</a>, <a class="linkColorD" href="http://riotjs.com/">Riot.js</a> and <a class="linkColorE" href="https://github.com/JohnSebastianHussey/midilearn/">midilearn</a></p> </div>', '', '', function(opts) {
+
+ 	this.on('mount', function() {
+
+	});
+}, '{ }');
+
+
+
 riot.tag2('multistepper', '<div class="js-multistepper-container {opts.styles.multistepper}"> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
@@ -19,16 +21,69 @@ riot.tag2('multistepper', '<div class="js-multistepper-container {opts.styles.mu
 			h: 550,
 			w: 550,
 			parent: $('.js-multistepper-container')
-		})
+		});
+
+		var demoLoop = [[0.8645906647592759, 0, 0, 0, 0.9981323924733413, 0, 0, 0, 0.905420931348198, 0, 0, 0, 0.9471031672208983, 0, 0, 0],
+			[0.1246250457803101, 0.24832121322357517, 0.366807941407015, 0.5701820818137647, 0, 0, 0, 0, 0.2743379863013952, 0.279860157980911, 0, 0.4754565969154526, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.7685664078112888],
+			[0, 0, 0, 0, 0.9376970762195217, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0.4615664336479542, 0, 0, 0, 0.5856159367142114, 0, 0, 0, 0.43524468231410784, 0, 0, 0, 0.3571203213484141, 0]];
+
+		$.each(multicirclestep1.wheels, function(index, wheel) {
+			wheel.list = demoLoop[index];
+		});
+
+		multicirclestep1.draw();
+
 	});
 
 }, '{ }');
+riot.tag2('play', '<div class="{opts.styles.playButton} js-play-button"> <div><span class="colorA">P</span><span class="colorB">l</span><span class="colorC">a</span><span class="colorD">y</span></div> <div class="hidden"><span class="colorA">S</span><span class="colorB">t</span><span class="colorC">o</span><span class="colorD">p</span></div> </div>', '', '', function(opts) {
+
+ 	this.on('mount', function() {
+		$('.js-play-button').click(function(e) {
+			$(e.currentTarget).children().toggleClass('hidden');
+			if (multicirclestep1.sequencing) {
+				multicirclestep1.stop()
+			}
+			else {
+				multicirclestep1.sequence(132);
+			}
+		});
+	});
+}, '{ }');
+
 riot.tag2('raw', '<span></span>', '', '', function(opts) {
 
   this.root.innerHTML = opts.content
 });
 
-riot.tag2('wheelsettings', '<div class="js-wheelsettings-container {opts.styles.wheelsettingsContainer}"> <div class="js-dial-container"> </div> <div class="{opts.styles.selectContainer}"> <label>Note</label> <select id="js-noteSelection"> <option each="{note, i in opts.notes}" value="{i}">{note} </option> </select> </div> <div class="{opts.styles.selectContainer}"> <label>Step Duration</label> <select id="js-stepDuration"> <option each="{stepDuration, i in opts.stepDurations}" value="{stepDuration.value}">{stepDuration.name} </option> </select> </div> <div class="{opts.styles.selectContainer}"> <label>Midi Instrument</label> <select id="js-midi"> <option each="{instrument, i in opts.midi}" value="{i}">{instrument.name} </option> </select> </div> </div>', '', '', function(opts) {
+riot.tag2('title', '<div class="{opts.styles.container}"> <h1><span class="{opts.styles.colorA}">S</span> <span class="{opts.styles.colorB}">t</span> <span class="{opts.styles.colorC}">e</span> <span class="{opts.styles.colorD}">p</span> <span class="{opts.styles.colorE}">p</span> <span class="{opts.styles.colorA}">i</span> <span class="{opts.styles.colorB}">n</span> <span class="{opts.styles.colorC}">g</span> </h1> </div>', '', '', function(opts) {
+
+	this.on('mount', function() {
+
+	});
+}, '{ }');
+riot.tag2('titletext', '<div class="{opts.styles.container}"> <h1><span class="colorA js-character">S</span> <span class="colorB js-character">t</span> <span class="colorC js-character">e</span> <span class="colorD js-character">p</span> <span class="colorE js-character">p</span> <span class="colorA js-character">i</span> <span class="colorB js-character">n</span> <span class="colorC js-character">g</span> </h1> </div>', '', '', function(opts) {
+
+	this.on('mount', function() {
+		var characters = $('.js-character')
+		var charactersLength = characters.length;
+		var count = 0;
+
+		var interval = setInterval(function(){
+			$('.js-character').removeClass('accent');
+			$(characters[count]).addClass('accent');
+			count++;
+		}, 200);
+
+		setTimeout(function() {
+			clearInterval(interval);
+		}, 200*(charactersLength+1))
+
+	});
+}, '{ }');
+riot.tag2('wheelsettings', '<div class="js-wheelsettings-container {opts.styles.wheelsettingsContainer}"> <div class="js-dial-container"> </div> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
 
@@ -112,7 +167,7 @@ riot.tag2('wheelsettings', '<div class="js-wheelsettings-container {opts.styles.
 		});
 	});
 }, '{ }');
-riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleContainer}"> <div each="{color, i in opts.colors}" toggleindex="{i}" class="js-toggle {parent.opts.styles.toggle} {⁗toggle⁗ + i} {i==1 ? ⁗active⁗ : ⁗⁗}"></div> <button class="js-play">Play</button> </div>', '', '', function(opts) {
+riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleContainer}"> <div each="{color, i in opts.colors}" toggleindex="{i}" class="js-toggle {parent.opts.styles.toggle} {⁗toggle⁗ + i} {i==1 ? ⁗active⁗ : ⁗⁗}"></div> </div>', '', '', function(opts) {
 
 	this.on('mount', function() {
 		var self = this;
@@ -143,10 +198,6 @@ riot.tag2('wheeltoggle', '<div class="js-toggle-container {opts.styles.toggleCon
 			$('#js-stepDuration').val(wheel.stepDuration)
 			$('#js-noteSelection').val(wheel.note)
 		})
-
-		$('.js-play').click(function(e) {
-			multicirclestep1.sequence(132);
-		});
 	});
 }, '{ }');
 function euclideanBeat(sequenceLength, onsets) {
@@ -376,6 +427,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _wheelsettings2 = _interopRequireDefault(_wheelsettings);
 
+	var _titletext = __webpack_require__(5);
+
+	var _titletext2 = _interopRequireDefault(_titletext);
+
+	var _about = __webpack_require__(6);
+
+	var _about2 = _interopRequireDefault(_about);
+
+	var _play = __webpack_require__(7);
+
+	var _play2 = _interopRequireDefault(_play);
+
+	var _footer = __webpack_require__(8);
+
+	var _footer2 = _interopRequireDefault(_footer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var BPM = 132;
@@ -425,6 +492,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		cb();
 	}
 
+	window.samples = [new Tone.Player("./samples/senA.mp3").toMaster(), new Tone.Player("./samples/senB.mp3").toMaster(), new Tone.Player("./samples/senC.mp3").toMaster(), new Tone.Player("./samples/senD.mp3").toMaster(), new Tone.Player("./samples/senE.mp3").toMaster()];
+
 	$(window).load(function () {
 
 		// problem - always merging dictionaries of styles
@@ -432,6 +501,26 @@ return /******/ (function(modules) { // webpackBootstrap
 		var mountComponents = function mountComponents() {
 
 			riot.mount('raw');
+
+			$.extend(_titletext2.default, _global2.default);
+			riot.mount('titletext', {
+				styles: _titletext2.default
+			});
+
+			$.extend(_about2.default, _global2.default);
+			riot.mount('about', {
+				styles: _about2.default
+			});
+
+			$.extend(_play2.default, _global2.default);
+			riot.mount('play', {
+				styles: _play2.default
+			});
+
+			$.extend(_footer2.default, _global2.default);
+			riot.mount('footer', {
+				styles: _footer2.default
+			});
 
 			var colors = [{
 				accent: "#00AAFF",
@@ -489,7 +578,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				colors: colors,
 				notes: fullNotes,
 				stepDurations: stepDurations,
-				midi: window.midi.inputsArray.reverse()
+				midi: window.midi ? window.midi.inputsArray.reverse() : []
 			});
 
 			multicirclestep1.on('*', function (val) {
@@ -498,29 +587,37 @@ return /******/ (function(modules) { // webpackBootstrap
 				var step = val.list.place;
 				var velocity = Math.floor(val.list.list[step] * 127);
 				if (velocity > 0) {
-					var instrument = window.midi.inputsArray[instrumentIndex];
+					//var instrument = window.midi.inputsArray[instrumentIndex];
 					var duration = 60000 / (BPM / val.list.stepDuration);
-					window.midi.noteOn(instrument, 0, note, velocity);
-					window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
+					var sample = window.samples[val.wheel];
+					sample.volume.value = -30 + 30 * (velocity * (1 / 127));
+					sample.stop();
+					sample.start();
+					//window.midi.noteOn(instrument, 0, note, velocity);
+					//window.midi.noteOff(instrument, 0, note, velocity, window.performance.now() + duration);
 				}
 			});
 		};
 
-		navigator.requestMIDIAccess().then(function (access) {
-			onMIDIInit(access, mountComponents);
-		}, function (err) {
-			// well at least we tried!
-			if (window.AudioContext) {
-				// Chrome
-				opts.api = 'webaudio';
-			} else if (window.Audio) {
-				// Firefox
-				opts.api = 'audiotag';
-			} else {
-				// no support
-				return;
-			}
-		});
+		if (navigator.requestMIDIAccess) {
+			navigator.requestMIDIAccess().then(function (access) {
+				onMIDIInit(access, mountComponents);
+			}, function (err) {
+				// well at least we tried!
+				if (window.AudioContext) {
+					// Chrome
+					opts.api = 'webaudio';
+				} else if (window.Audio) {
+					// Firefox
+					opts.api = 'audiotag';
+				} else {
+					// no support
+					return;
+				}
+			});
+		} else {
+			mountComponents();
+		}
 	});
 
 /***/ },
@@ -528,7 +625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"redclone":"global__redclone___34Kz7","cyanclone":"global__cyanclone___VYgC5","hover":"global__hover___3eVS9","blurContainer":"global__blurContainer___Dsm81","active":"global__active___2THSs"};
+	module.exports = {"container":"global__container___1y-QC","blurContainer":"global__blurContainer___Dsm81","active":"global__active___2THSs"};
 
 /***/ },
 /* 2 */
@@ -550,6 +647,33 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// removed by extract-text-webpack-plugin
 	module.exports = {"wheelsettingsContainer":"wheelsettings__wheelsettingsContainer___2l8aO","selectContainer":"wheelsettings__selectContainer___16f1j"};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"textContainer":"about__textContainer___3tDdM"};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"playButton":"play__playButton___1TnUq"};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"footer":"footer__footer___2pTS5"};
 
 /***/ }
 /******/ ])
