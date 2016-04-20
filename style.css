@@ -236,8 +236,7 @@ body {
 }.footer__footer___2pTS5 {
     width: 100%;
     color: #666666;
-    position: absolute;
-    bottom: 0px;
+    float: left;
     background-color: #E3E3E3;
     margin-top: 50px;
 }
